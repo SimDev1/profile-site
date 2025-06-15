@@ -6,7 +6,7 @@ const projects = [
   {
     title: 'Portfolio Website',
     description: 'A personal website built with React and Material UI.',
-    link: 'https://profile-site-phi.vercel.app'
+    link: 'https://chimbuchi-victory.vercel.app'
   },
   {
     title: 'Task Manager',
