@@ -7,14 +7,15 @@ import {
   IconButton,
   Drawer,
   List,
-  ListItem,
+  ListItemButton,
+  ListItemText,
   Box,
   useMediaQuery,
   useTheme,
+  Divider,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-// ✅ Correct hrefs and color values
 const navItems = [
   { label: 'About', href: '#about', color: '#ff4081' },
   { label: 'Skills', href: '#skills', color: '#7c4dff' },
@@ -30,33 +31,43 @@ function Navbar() {
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
 
   const drawerContent = (
-    <Box sx={{ width: 250, mt: 2 }} onClick={toggleDrawer}>
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer}>
+      <Typography
+        variant="h6"
+        sx={{
+          my: 2,
+          textAlign: 'center',
+          fontWeight: 700,
+          fontFamily: 'Inter, Roboto, sans-serif',
+        }}
+      >
+        SimDev
+      </Typography>
+      <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem
-            button
+          <ListItemButton
             key={item.label}
             component="a"
             href={item.href}
             sx={{
               '&:hover': {
-                transform: 'scale(1.05)',
-                transition: 'transform 0.3s ease',
+                bgcolor: 'rgba(0,0,0,0.04)',
+                transform: 'translateX(5px)',
               },
-              mb: 1,
+              transition: 'all 0.3s ease',
             }}
           >
-            <Typography
-              sx={{
-                fontFamily: 'Pacifico, cursive',
-                fontSize: '1.3rem',
+            <ListItemText
+              primary={item.label}
+              primaryTypographyProps={{
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                fontFamily: 'Inter, Roboto, sans-serif',
                 color: item.color,
-                transition: 'color 0.3s ease',
               }}
-            >
-              {item.label}
-            </Typography>
-          </ListItem>
+            />
+          </ListItemButton>
         ))}
       </List>
     </Box>
@@ -64,25 +75,21 @@ function Navbar() {
 
   return (
     <>
-<AppBar
-  position="sticky"
-  sx={{
-    top: 0,
-    zIndex: theme => theme.zIndex.drawer + 1, // ensures it stays above drawers/sections
-    backgroundImage: 'linear-gradient(to right, #1c1c1c, #2c2c2c)',
-    boxShadow: 'none',
-  }}
->
-
-      
-        <Toolbar>
+      <AppBar
+        position="sticky"
+        elevation={4}
+        sx={{
+          backgroundImage: 'linear-gradient(to right, #1c1c1c, #2c2c2c)',
+          zIndex: theme.zIndex.drawer + 1,
+        }}
+      >
+        <Toolbar sx={{ px: { xs: 2, sm: 4 } }}>
           {isMobile && (
             <IconButton
               edge="start"
               color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
               onClick={toggleDrawer}
+              sx={{ mr: 2 }}
             >
               <MenuIcon />
             </IconButton>
@@ -92,10 +99,11 @@ function Navbar() {
             variant="h5"
             sx={{
               flexGrow: 1,
-              fontFamily: 'Lobster, cursive',
-              fontWeight: 'bold',
+              fontFamily: 'Inter, Roboto, sans-serif',
+              fontWeight: 800,
               color: '#fff',
               letterSpacing: 1,
+              fontSize: { xs: '1.5rem', sm: '1.8rem' },
             }}
           >
             SimDev
@@ -108,19 +116,22 @@ function Navbar() {
                 href={item.href}
                 sx={{
                   mx: 1,
+                  px: 2,
+                  py: 1,
+                  borderRadius: 2,
+                  transition: 'all 0.3s ease',
                   '&:hover': {
-                    transform: 'scale(1.1)',
-                    transition: 'transform 0.3s ease-in-out',
+                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                    transform: 'scale(1.05)',
                   },
                 }}
               >
                 <Typography
                   sx={{
-                    fontFamily: 'Dancing Script, cursive',
-                    color: item.color,
-                    fontSize: '1.1rem',
+                    fontFamily: 'Inter, Roboto, sans-serif',
                     fontWeight: 'bold',
-                    transition: 'color 0.3s ease',
+                    fontSize: '1rem',
+                    color: item.color,
                   }}
                 >
                   {item.label}
@@ -130,7 +141,16 @@ function Navbar() {
         </Toolbar>
       </AppBar>
 
-      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={toggleDrawer}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#f9f9f9',
+          },
+        }}
+      >
         {drawerContent}
       </Drawer>
     </>

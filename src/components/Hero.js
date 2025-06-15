@@ -3,9 +3,9 @@ import { Box, Typography, Avatar } from '@mui/material';
 
 function Hero() {
   return (
-    <Box textAlign="center" my={5}>
+    <Box textAlign="center" my={5} mb={8}>
       <Avatar
-        alt="P"
+        alt="Anyanwu Simeon"
         src="/profile.png"
         sx={{
           width: 140,
@@ -18,7 +18,7 @@ function Hero() {
         variant="h3"
         mt={2}
         sx={{
-          fontFamily: 'Pacifico, cursive',
+          fontFamily: 'Roboto, Inter, sans-serif',
           fontWeight: 'bold',
           color: 'white',
         }}
@@ -28,7 +28,7 @@ function Hero() {
       <Typography
         variant="h5"
         sx={{
-          fontFamily: 'Dancing Script, cursive',
+          fontFamily: 'Inter, Roboto, sans-serif',
           color: 'white',
           mt: 1,
         }}
